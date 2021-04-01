@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DefaultFootmanUnitProps
   m_EditorClassIdentifier: 
   _moveSpeed: 10
-  _rotationSpeed: 60
+  _rotationSpeed: 180

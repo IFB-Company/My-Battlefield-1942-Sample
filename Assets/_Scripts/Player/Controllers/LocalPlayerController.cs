@@ -1,6 +1,8 @@
-﻿using _Scripts.Player.Controllers.Base;
+﻿using System.Collections.Generic;
+using _Scripts.Player.Controllers.Base;
 using _Scripts.Player.Controls;
 using _Scripts.Player.Controls.Base;
+using _Scripts.Static;
 using _Scripts.Units.Base;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -21,6 +23,7 @@ namespace _Scripts.Player.Controllers
 
         public IPlayerControlProvider ControlProvider => _localPlayerControlProvider;
         
+        
         private void Awake()
         {
             Assert.IsNotNull(_localPlayerControlProvider, "_localPlayerControlProvider != null");
@@ -35,12 +38,20 @@ namespace _Scripts.Player.Controllers
         {
             if (_currentBattleUnit != null)
             {
-                if (_localPlayerControlProvider.IsInstantMoveActivated)
-                {
-                    _currentBattleUnit.MoveAtFrame(_unitMoveDirection);
-                }
+                var rotationControl =
+                    _localPlayerControlProvider.GetControlProviderByName(GameHelper.ControlNames.ROTATION_JOYSTICK);
 
-                var rotationControl = _localPlayerControlProvider.RotationControl;
+                var movementControl =
+                    _localPlayerControlProvider.GetControlProviderByName(GameHelper.ControlNames.MOVEMENT_JOYSTICK);
+
+                var moveVector = new Vector3(
+                    movementControl.GetX,
+                    0,
+                    movementControl.GetY
+                );
+                
+                _currentBattleUnit.MoveAtFrame(moveVector);
+                
                 _currentBattleUnit.RotateAtFrame(Vector3.up * rotationControl.GetX);
             }
         }

@@ -1,7 +1,7 @@
 ﻿namespace _Scripts.Player.Controls.Base
 {
-    public interface IPlayerControlProvider 
+    public interface IPlayerControlProvider
     {
-        IControlProvider RotationControl { get; }
+        IControlProvider GetControlProviderByName(string controlProviderName);
     }
 }

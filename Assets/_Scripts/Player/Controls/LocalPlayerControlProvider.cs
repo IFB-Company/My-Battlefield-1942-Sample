@@ -1,43 +1,57 @@
-﻿using _Scripts.Player.Controls.Base;
+﻿using System.Collections.Generic;
+using _Scripts.Player.Controls.Base;
+using _Scripts.Static;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.UI;
 
 namespace _Scripts.Player.Controls
 {
     public class LocalPlayerControlProvider : MonoBehaviour, IPlayerControlProvider
     {
         [SerializeField] private Joystick _rotationJoystick;
-        [SerializeField] private Button _instantMoveBtn;
-
-        [Space]
-        [Header("Runtime")]
-        [SerializeField] private bool _isInstantMoveActivated;
-        public bool IsInstantMoveActivated => _isInstantMoveActivated;
+        [SerializeField] private Joystick _moveJoystick;
         
-        public IControlProvider RotationControl { get; private set; }
+        
+        private IControlProvider _rotationControl;
+        private IControlProvider _moveControl;
+        
+        private Dictionary<string, IControlProvider> _controlsDict;
 
         private void Awake()
         {
             Assert.IsNotNull(_rotationJoystick ,"_rotationJoystick != null");
-            Assert.IsNotNull(_instantMoveBtn ,"_instantMoveBtn != null");
-            
-            _instantMoveBtn.onClick.AddListener(OnInstantMoveButtonClicked);
+            Assert.IsNotNull(_moveJoystick ,"_moveJoystick != null");
+
             InitControls();
         }
 
         private void InitControls()
         {
 #if UNITY_EDITOR || UNITY_STANDALONE
-            RotationControl = new JoystickAndMouseControlProvider(_rotationJoystick);
+            _rotationControl = new JoystickAndMouseControlProvider(_rotationJoystick);
+            _moveControl = new JoystickAndKeyboardControlProvider(_moveJoystick);
 #else
-            RotationControl = new JoystickControlProvider(_rotationJoystick);
+            _rotationControl = new JoystickControlProvider(_rotationJoystick);
+            _moveControl = new JoystickAndKeyboardControlProvider(_moveJoystick);
 #endif
-        }
 
-        private void OnInstantMoveButtonClicked()
+            _controlsDict = new Dictionary<string, IControlProvider>()
+            {
+                {GameHelper.ControlNames.MOVEMENT_JOYSTICK, _moveControl},
+                {GameHelper.ControlNames.ROTATION_JOYSTICK, _rotationControl}
+            };
+
+        }
+        
+
+        public IControlProvider GetControlProviderByName(string controlProviderName)
         {
-            _isInstantMoveActivated = !_isInstantMoveActivated;
+            if (_controlsDict.TryGetValue(controlProviderName, out IControlProvider provider))
+            {
+                return provider;
+            }
+
+            return GameHelper.NullObjects.NullControlProvider;
         }
     }
 }
