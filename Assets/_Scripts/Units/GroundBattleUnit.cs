@@ -11,6 +11,8 @@ namespace _Scripts.Units
         [SerializeField] protected Rigidbody _rigidbody;
         public Rigidbody Rigidbody => _rigidbody;
 
+        [SerializeField] protected GroundChecker _groundChecker;
+
         private Vector3? _targetMoveDir;
         private Vector3? _targetRotDir;
 
@@ -66,7 +68,9 @@ namespace _Scripts.Units
 
         private void Jump()
         {
-            _rigidbody.AddForce(_jumpDir * _jumpStrength);
+            bool isCanJump = _groundChecker != null ? _groundChecker.IsGrounded() : true;
+            if(isCanJump)
+                _rigidbody.AddForce(_jumpDir * _jumpStrength);
         }
     }
 }

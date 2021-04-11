@@ -618,7 +618,7 @@ GameObject:
   - component: {fileID: 308978705}
   - component: {fileID: 308978704}
   - component: {fileID: 308978703}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -824,7 +824,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 516060402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1169,6 +1169,7 @@ Transform:
   m_Children:
   - {fileID: 288991394}
   - {fileID: 1548309418}
+  - {fileID: 1450894294}
   m_Father: {fileID: 659583907}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1199,7 +1200,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitProperties: {fileID: 11400000, guid: dae372b41539c9b439fffbcb6ca13b61, type: 2}
+  _jumpDir: {x: 0, y: 1, z: 0}
+  _jumpStrength: 250
   _rigidbody: {fileID: 1201420179}
+  _groundChecker: {fileID: 1450894296}
 --- !u!54 &1201420179
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1299,6 +1303,54 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263108084}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1450894293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1450894294}
+  - component: {fileID: 1450894296}
+  m_Layer: 0
+  m_Name: GroundChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1450894294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450894293}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1201420176}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1450894296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450894293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bdf1ff41ca0bef4b8909661a73f81a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _checkRadius: 0.2
+  _isGrounded: 0
 --- !u!1 &1548309417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,7 +1476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1666867004}
   - component: {fileID: 1666867003}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
