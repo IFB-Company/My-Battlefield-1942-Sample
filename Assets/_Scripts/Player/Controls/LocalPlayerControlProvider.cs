@@ -10,7 +10,7 @@ namespace _Scripts.Player.Controls
     {
         [SerializeField] private Joystick _rotationJoystick;
         [SerializeField] private Joystick _moveJoystick;
-        
+        [SerializeField] private UIButtonControlProvider _uiButtonControlProvider;
         
         private IControlProvider _rotationControl;
         private IControlProvider _moveControl;
@@ -20,6 +20,7 @@ namespace _Scripts.Player.Controls
         private void Awake()
         {
             Assert.IsNotNull(_rotationJoystick ,"_rotationJoystick != null");
+            Assert.IsNotNull(_uiButtonControlProvider ,"_uiButtonControlProvider != null");
             Assert.IsNotNull(_moveJoystick ,"_moveJoystick != null");
 
             InitControls();
@@ -52,6 +53,11 @@ namespace _Scripts.Player.Controls
             }
 
             return GameHelper.NullObjects.NullControlProvider;
+        }
+
+        public IButtonControlProvider GetButtonControlProvider()
+        {
+            return _uiButtonControlProvider;
         }
     }
 }

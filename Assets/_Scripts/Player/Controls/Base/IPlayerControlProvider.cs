@@ -3,5 +3,7 @@
     public interface IPlayerControlProvider
     {
         IControlProvider GetControlProviderByName(string controlProviderName);
+
+        IButtonControlProvider GetButtonControlProvider();
     }
 }

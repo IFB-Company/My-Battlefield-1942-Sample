@@ -1,14 +1,15 @@
-﻿using System;
+﻿using _Scripts.Player.Controls.Enums;
 using _Scripts.Units.Base;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace _Scripts.Units
 {
     public class GroundBattleUnit : BattleUnitBase
     {
+        [SerializeField] protected Vector3 _jumpDir = Vector3.up;
+        [SerializeField] protected float _jumpStrength = 500f;
         [SerializeField] protected Rigidbody _rigidbody;
-        public Rigidbody NavMeshAgent => _rigidbody;
+        public Rigidbody Rigidbody => _rigidbody;
 
         private Vector3? _targetMoveDir;
         private Vector3? _targetRotDir;
@@ -44,6 +45,28 @@ namespace _Scripts.Units
                 transform.Rotate(_targetRotDir.Value * _unitProperties.RotationSpeed * Time.fixedDeltaTime);    
             }
 
+        }
+
+        public override void HandleControlByButtonType(ButtonType buttonType)
+        {
+            if (buttonType == ButtonType.FIRE)
+            {
+                Fire();
+            }
+            else if (buttonType == ButtonType.JUMP)
+            {
+                Jump();
+            }
+        }
+
+        private void Fire()
+        {
+            
+        }
+
+        private void Jump()
+        {
+            _rigidbody.AddForce(_jumpDir * _jumpStrength);
         }
     }
 }

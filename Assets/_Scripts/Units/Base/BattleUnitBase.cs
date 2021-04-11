@@ -1,4 +1,5 @@
-﻿using _Scripts.SettingsData;
+﻿using _Scripts.Player.Controls.Enums;
+using _Scripts.SettingsData;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -15,5 +16,10 @@ namespace _Scripts.Units.Base
         
         public abstract void MoveAtFrame(Vector3 dir);
         public abstract void RotateAtFrame(Vector3 dir);
+
+        public virtual void HandleControlByButtonType(ButtonType buttonType)
+        {
+            
+        }
     }
 }
