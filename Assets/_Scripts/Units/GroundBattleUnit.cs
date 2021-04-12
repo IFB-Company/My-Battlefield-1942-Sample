@@ -13,8 +13,8 @@ namespace _Scripts.Units
 
         [SerializeField] protected GroundChecker _groundChecker;
 
-        private Vector3? _targetMoveDir;
-        private Vector3? _targetRotDir;
+        protected Vector3? _targetMoveDir;
+        protected Vector3? _targetRotDir;
 
         public override void MoveAtFrame(Vector3 dir)
         {
@@ -26,7 +26,12 @@ namespace _Scripts.Units
             _targetRotDir = dir;
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
+        {
+            MovementLoop();
+        }
+
+        protected virtual void MovementLoop()
         {
             if (_rigidbody == null)
                 return;
@@ -46,7 +51,6 @@ namespace _Scripts.Units
                 _rigidbody.angularVelocity = Vector3.zero;
                 transform.Rotate(_targetRotDir.Value * _unitProperties.RotationSpeed * Time.fixedDeltaTime);    
             }
-
         }
 
         public override void HandleControlByButtonType(ButtonType buttonType)
@@ -61,12 +65,12 @@ namespace _Scripts.Units
             }
         }
 
-        private void Fire()
+        protected virtual void Fire()
         {
             
         }
 
-        private void Jump()
+        protected virtual void Jump()
         {
             bool isCanJump = _groundChecker != null ? _groundChecker.IsGrounded() : true;
             if(isCanJump)
