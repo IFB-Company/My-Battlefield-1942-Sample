@@ -1,10 +1,28 @@
-﻿namespace _Scripts.Units.Weapons
+﻿using System;
+
+namespace _Scripts.Units.Weapons
 {
     public class NullWeapon : WeaponBase
     {
-        public override void Fire()
+        private void OnValidate()
         {
-            
+            if (_aimAnchor == null)
+            {
+                _aimAnchor = transform;
+            }
+        }
+
+        private void Awake()
+        {
+            if (_aimAnchor == null)
+            {
+                _aimAnchor = transform;
+            }
+        }
+
+        protected override bool OnFire()
+        {
+            return false;
         }
     }
 }

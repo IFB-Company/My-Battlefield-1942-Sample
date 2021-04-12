@@ -1,5 +1,4 @@
-﻿using System;
-using _Scripts.Player.Controls.Enums;
+﻿using _Scripts.Player.Controls.Enums;
 using _Scripts.SettingsData;
 using _Scripts.Units.Weapons;
 using UnityEngine;

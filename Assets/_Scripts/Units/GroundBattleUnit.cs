@@ -67,7 +67,7 @@ namespace _Scripts.Units
 
         protected virtual void Fire()
         {
-            
+            _weaponBase.Fire();
         }
 
         protected virtual void Jump()

@@ -18,5 +18,21 @@ namespace _Scripts.Units.Weapons
         [SerializeField] private bool _isInfiniteAmmunition;
         public bool IsInfiniteAmmunition => _isInfiniteAmmunition;
 
+        [SerializeField] private int _maxAmmunition;
+        public int MaxAmmunition => _maxAmmunition;
+
+        [SerializeField] private int _currentAmmunition;
+        public int CurrentAmmunition => _currentAmmunition;
+
+        public WeaponData(WeaponData oldData, int currentAmmunition)
+        {
+            _damageRange = oldData.DamageRange;
+            _weaponDelay = oldData.WeaponDelay;
+            _weaponType = oldData.WeaponType;
+            _isInfiniteAmmunition = oldData.IsInfiniteAmmunition;
+            _maxAmmunition = oldData.MaxAmmunition;
+            _currentAmmunition = currentAmmunition;
+        }
+
     }
 }
