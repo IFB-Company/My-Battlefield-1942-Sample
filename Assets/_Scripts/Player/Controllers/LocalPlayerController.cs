@@ -72,8 +72,14 @@ namespace _Scripts.Player.Controllers
                 );
                 
                 _currentBattleUnit.MoveAtFrame(moveVector);
+
+                var rotVector = new Vector3(
+                    rotationControl.GetX,
+                    rotationControl.GetY,
+                    0
+                );
                 
-                _currentBattleUnit.RotateAtFrame(Vector3.up * rotationControl.GetX);
+                _currentBattleUnit.RotateAtFrame(rotVector);
             }
         }
     }

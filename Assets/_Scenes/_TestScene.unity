@@ -1539,6 +1539,7 @@ MonoBehaviour:
   _jumpStrength: 250
   _rigidbody: {fileID: 1201420179}
   _groundChecker: {fileID: 1450894296}
+  _faceObj: {fileID: 1693123784}
 --- !u!54 &1201420179
 Rigidbody:
   m_ObjectHideFlags: 0

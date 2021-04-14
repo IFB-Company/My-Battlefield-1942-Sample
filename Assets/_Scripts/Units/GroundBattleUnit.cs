@@ -49,7 +49,7 @@ namespace _Scripts.Units
             if (_targetRotDir.HasValue)
             {
                 _rigidbody.angularVelocity = Vector3.zero;
-                transform.Rotate(_targetRotDir.Value * _unitProperties.RotationSpeed * Time.fixedDeltaTime);    
+                transform.Rotate(Vector3.up * _targetRotDir.Value.x * _unitProperties.RotationSpeed * Time.fixedDeltaTime);    
             }
         }
 
