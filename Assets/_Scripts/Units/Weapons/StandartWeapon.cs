@@ -28,6 +28,12 @@ namespace _Scripts.Units.Weapons
             var scenePool = SceneGamePool.Instance;
             Assert.IsNotNull(scenePool, "scenePool != null");
             var bullet = scenePool.GetObjectFromPool(_projectilePrefab);
+
+            if (bullet.TryGetComponent(out IBullet bulletComponent))
+            {
+                bulletComponent.Initialize(_ownerUnit, _weaponData);
+            }
+            
             bullet.transform.position = _aimAnchor.transform.position;
             bullet.transform.rotation = _aimAnchor.transform.rotation;
             

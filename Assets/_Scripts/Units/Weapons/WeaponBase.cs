@@ -1,4 +1,5 @@
 ﻿using System;
+using _Scripts.Units.Base;
 using UnityEngine;
 
 namespace _Scripts.Units.Weapons
@@ -10,8 +11,17 @@ namespace _Scripts.Units.Weapons
 
         [SerializeField] protected Transform _aimAnchor;
         public Transform AimAnchor => _aimAnchor;
-        public event Action<WeaponBase> OnFireEvent; 
-        
+        public event Action<WeaponBase> OnFireEvent;
+
+        protected BattleUnitBase _ownerUnit;
+
+
+        private void Awake()
+        {
+            _ownerUnit = GetComponentInParent<BattleUnitBase>();
+            Debug.Log($"Owner unit found!: {_ownerUnit.name}");
+        }
+
         public virtual void Fire()
         {
             if (OnFire())

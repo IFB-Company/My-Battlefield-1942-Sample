@@ -1,4 +1,5 @@
-﻿using _Scripts.Location;
+﻿using System;
+using _Scripts.Location;
 using UnityEngine;
 
 namespace _Scripts.Units.Weapons
@@ -31,6 +32,11 @@ namespace _Scripts.Units.Weapons
                 }
             }
             gameObject.SetActive(false);
+            
+        }
+
+        private void OnDisable()
+        {
             if (SceneGamePool.Instance != null)
             {
                 SceneGamePool.Instance.AddObjectInPool(_poolName, this.gameObject);

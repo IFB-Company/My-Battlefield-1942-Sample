@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 6222290961817530695}
   - component: {fileID: 1734493983738235577}
   - component: {fileID: 3314076696434545692}
+  - component: {fileID: 121786405021270314}
   m_Layer: 0
   m_Name: SampleBullet
   m_TagString: Untagged
@@ -188,6 +189,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 1
   m_Emitting: 1
+--- !u!114 &121786405021270314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283191502156165863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 822eec3bd10fea642992153d5c1e293d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectileLength: 0.2
 --- !u!1 &5621588239475190326
 GameObject:
   m_ObjectHideFlags: 0

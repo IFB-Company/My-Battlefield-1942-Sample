@@ -39,5 +39,10 @@ namespace _Scripts.Units.Base
         {
             
         }
+
+        public void Damage(int damage, BattleUnitBase damagerUnit)
+        {
+            Debug.Log($"{name} get damage {damage} from {damagerUnit.name}!");
+        }
     }
 }
