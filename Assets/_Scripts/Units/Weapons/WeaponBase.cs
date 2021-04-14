@@ -25,5 +25,10 @@ namespace _Scripts.Units.Weapons
         /// </summary>
         /// <returns>Is success?</returns>
         protected abstract bool OnFire();
+
+        public void SetAimAnchor(Transform aimAnchor)
+        {
+            _aimAnchor = aimAnchor;
+        }
     }
 }
