@@ -79,6 +79,8 @@ MonoBehaviour:
   _poolName: SampleBullet
   _lifeTime: 3
   _moveSpeed: 30
+  _trailRenderers:
+  - {fileID: 3314076696434545692}
 --- !u!96 &3314076696434545692
 TrailRenderer:
   serializedVersion: 2
