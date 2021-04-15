@@ -8,6 +8,9 @@ namespace _Scripts.Units.Base
 {
     public abstract class BattleUnitBase : MonoBehaviour
     {
+        [SerializeField] protected Transform _cameraPosition;
+        public Transform CameraPosition => _cameraPosition;
+        
         [SerializeField] protected UnitProperties _unitProperties;
         [SerializeField] protected WeaponBase _weaponBase;
 

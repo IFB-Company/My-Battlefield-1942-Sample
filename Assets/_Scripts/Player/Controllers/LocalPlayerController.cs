@@ -96,5 +96,10 @@ namespace _Scripts.Player.Controllers
                 _currentBattleUnit.RotateAtFrame(rotVector);
             }
         }
+        
+        public void SetCurrentBattleUnit(BattleUnitBase battleUnit)
+        {
+            _currentBattleUnit = battleUnit;
+        }
     }
 }
