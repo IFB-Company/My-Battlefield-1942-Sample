@@ -1887,6 +1887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localPlayerControlProvider: {fileID: 1960277377}
+  _footmanBattleUnit: {fileID: 1201420178}
   _unitMoveDirection: {x: 0, y: 0, z: 1}
   _currentBattleUnit: {fileID: 1201420178}
 --- !u!1 &1666867002

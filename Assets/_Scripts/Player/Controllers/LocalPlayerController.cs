@@ -5,6 +5,7 @@ using _Scripts.Player.Controls;
 using _Scripts.Player.Controls.Base;
 using _Scripts.Player.Controls.Enums;
 using _Scripts.Static;
+using _Scripts.Units;
 using _Scripts.Units.Base;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -14,25 +15,38 @@ namespace _Scripts.Player.Controllers
     public class LocalPlayerController : MonoBehaviour, IPlayerController
     {
         [SerializeField] private LocalPlayerControlProvider _localPlayerControlProvider;
-
+        [SerializeField] private FootmanBattleUnit _footmanBattleUnit;
         [Space]
         [SerializeField] private Vector3 _unitMoveDirection = Vector3.forward;
         
         [Space]
         [Header("Runtime")]
         [SerializeField] private BattleUnitBase _currentBattleUnit;
+        
+
+        public FootmanBattleUnit FootmanBattleUnit => _footmanBattleUnit;
         public BattleUnitBase CurrentBattleUnit => _currentBattleUnit;
 
         public IPlayerControlProvider ControlProvider => _localPlayerControlProvider;
 
         private IButtonControlProvider _buttonControlProvider;
-        
+
+        private void OnValidate()
+        {
+            if (_footmanBattleUnit == null)
+            {
+                _footmanBattleUnit = GetComponentInChildren<FootmanBattleUnit>();
+            }
+        }
+
         private void Awake()
         {
             Assert.IsNotNull(_localPlayerControlProvider, "_localPlayerControlProvider != null");
 
             _buttonControlProvider = _localPlayerControlProvider.GetButtonControlProvider();
             Assert.IsNotNull(_buttonControlProvider, "buttonProvider != null");
+            
+            Assert.IsNotNull(_footmanBattleUnit, "_footmanBattleUnit != null");
             
             _buttonControlProvider.OnButtonPressedEvent += ButtonProviderOnButtonPressedEvent;
         }
