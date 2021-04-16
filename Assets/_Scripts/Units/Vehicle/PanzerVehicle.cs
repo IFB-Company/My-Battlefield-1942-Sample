@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace _Scripts.Units.Vehicle
 {
@@ -7,12 +7,19 @@ namespace _Scripts.Units.Vehicle
     {
         [SerializeField] private float _moveTorque = 200f;
         [SerializeField] private float _rotTorque = 200f;
+        [SerializeField] private float _rotTowerSpeed = 40f;
+        [SerializeField] private float _rotMuzzleSpeed = 40f;
+        [SerializeField] private float _muzzleMaxAngleX = 30f;
         
         [SerializeField] private Rigidbody _leadRb;
         [SerializeField] private ConstantForce _constantForce;
         
         [SerializeField] private float _clampSpeed = 5f;
 
+        [SerializeField] private Transform _muzzle;
+        [SerializeField] private Transform _tower;
+
+        private float _muzzleXRot;
 
         private Vector3? _moveDir;
         private Vector3? _rotDir;
@@ -26,6 +33,9 @@ namespace _Scripts.Units.Vehicle
         protected override void Awake()
         {
             base.Awake();
+            
+            Assert.IsNotNull(_muzzle, "_muzzle != null");
+            Assert.IsNotNull(_tower, "_tower != null");
         }
 
         public override void MoveAtFrame(Vector3 dir)
@@ -37,7 +47,11 @@ namespace _Scripts.Units.Vehicle
 
         public override void RotateAtFrame(Vector3 dir)
         {
-            _rotDir = dir;
+            _tower.Rotate(Vector3.up * dir.x * _rotTowerSpeed * Time.deltaTime);
+
+            _muzzleXRot -= (dir.y * _rotMuzzleSpeed * Time.deltaTime);
+            var clampedXRot = Mathf.Clamp(_muzzleXRot, -_muzzleMaxAngleX, _muzzleMaxAngleX);
+            _muzzle.localRotation = Quaternion.Euler(clampedXRot, 0, 0);
         }
 
         private void FixedUpdate()
