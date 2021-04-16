@@ -11,6 +11,8 @@ namespace _Scripts.Units.Vehicle
         private IPlayerController _playerController;
 
         private BattleVehicleBase _vehicle;
+
+        public bool IsOnVehicle => _vehicle != null;
         
         private void Awake()
         {
@@ -74,6 +76,8 @@ namespace _Scripts.Units.Vehicle
                 }
                 _playerController.SetCurrentBattleUnit(footman);
                 _vehicle.LeaveVehicle();
+
+                _vehicle = null;
             }
             
         }

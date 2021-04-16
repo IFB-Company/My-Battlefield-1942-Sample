@@ -7,6 +7,7 @@ using _Scripts.Player.Controls.Enums;
 using _Scripts.Static;
 using _Scripts.Units;
 using _Scripts.Units.Base;
+using _Scripts.Units.Vehicle;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -48,6 +49,7 @@ namespace _Scripts.Player.Controllers
             
             Assert.IsNotNull(_footmanBattleUnit, "_footmanBattleUnit != null");
             
+
             _buttonControlProvider.OnButtonPressedEvent += ButtonProviderOnButtonPressedEvent;
         }
 

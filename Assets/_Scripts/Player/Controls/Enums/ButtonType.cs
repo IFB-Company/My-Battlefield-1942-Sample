@@ -4,6 +4,7 @@
     {
         NONE, 
         JUMP,
-        FIRE
+        FIRE,
+        VEHICLE_INTERACT
     }
 }
