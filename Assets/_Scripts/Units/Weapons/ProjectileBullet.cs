@@ -35,14 +35,19 @@ namespace _Scripts.Units.Weapons
 
         private void ProjectileLoop()
         {
+            #if UNITY_EDITOR
+            Debug.DrawLine(transform.position, transform.position + transform.forward, Color.red, 0.5f);
+            #endif
+
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _projectileLength))
             {
-                if (hit.collider.TryGetComponent(out BattleUnitBase unitBase))
+                if (hit.collider.TryGetComponent(out HitCollider hitCollider))
                 {
-                    var dmg = Mathf.RoundToInt(_weaponData.DamageRange.GetValue);
-                    unitBase.Damage(dmg, _owner);
-                    gameObject.SetActive(false);
+                    hitCollider.Damage(_owner, _weaponData);
+                    Debug.Log($"Damage: {hitCollider.name}");
                 }
+                
+                gameObject.SetActive(false);
             }
         }
     }

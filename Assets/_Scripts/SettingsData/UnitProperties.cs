@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using _Scripts.Units.Weapons;
+using UnityEngine;
 
 namespace _Scripts.SettingsData
 {
@@ -10,5 +12,14 @@ namespace _Scripts.SettingsData
 
         [SerializeField] private float _rotationSpeed = 10f;
         public float RotationSpeed => _rotationSpeed;
+
+        [SerializeField] private int _maxHp = 100;
+        public int MaxHp => _maxHp;
+
+        [SerializeField] private int _armor = 1;
+        public int Armor => _armor;
+
+        [SerializeField] private WeaponType[] _ignoreWeaponTypes;
+        public IReadOnlyCollection<WeaponType> IgnoreWeaponTypes => _ignoreWeaponTypes;
     }
 }
