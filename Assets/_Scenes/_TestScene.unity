@@ -1905,7 +1905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8160750fb0d0f634d9134d3f8e3d59e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _findRange: 1
+  _findRange: 1.5
   _cacheSize: 5
   _isActive: 1
 --- !u!1 &1222618551
@@ -1991,6 +1991,60 @@ MonoBehaviour:
     _maxAmmunition: 0
     _currentAmmunition: 0
   _aimAnchor: {fileID: 1255380158}
+--- !u!1 &1306379093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1306379094}
+  - component: {fileID: 1306379095}
+  m_Layer: 0
+  m_Name: SHARMAN_WEAPON
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1306379094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306379093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1693331733}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1306379095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306379093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f6accc0d160174eaaf5aa314461598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponData:
+    _damageRange:
+      _range: {x: 50, y: 100}
+    _weaponDelay: 1
+    _weaponType: 3
+    _isInfiniteAmmunition: 1
+    _maxAmmunition: 0
+    _currentAmmunition: 0
+  _aimAnchor: {fileID: 1352113021}
+  _projectilePrefab: {fileID: 4283191502156165863, guid: 094f9f2f1b689a24b96ca075f331f508,
+    type: 3}
 --- !u!1 &1323579768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,6 +2683,7 @@ Transform:
   - {fileID: 1058849294}
   - {fileID: 766457402}
   - {fileID: 2143707468}
+  - {fileID: 1306379094}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2646,15 +2701,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraPosition: {fileID: 1085744252}
   _unitProperties: {fileID: 11400000, guid: dae372b41539c9b439fffbcb6ca13b61, type: 2}
-  _weaponBase: {fileID: 1255380159}
+  _weaponBase: {fileID: 1306379095}
   _leavePosition: {fileID: 2143707468}
   _moveTorque: 25000
   _rotTorque: 50
   _rotTowerSpeed: 40
   _rotMuzzleSpeed: 40
+  _muzzleMaxAngleX: 30
   _leadRb: {fileID: 1693331735}
   _constantForce: {fileID: 1693331737}
-  _clampSpeed: 5
+  _clampSpeed: 8
   _muzzle: {fileID: 295933270298680857}
   _tower: {fileID: 7356313576220573555}
 --- !u!54 &1693331735

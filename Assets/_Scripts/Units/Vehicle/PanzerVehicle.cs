@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Scripts.Player.Controls.Enums;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace _Scripts.Units.Vehicle
@@ -71,6 +72,18 @@ namespace _Scripts.Units.Vehicle
                 //_leadRb.AddTorque(transform.up * _moveDir.Value.x * _moveTorque);
             }
         }
-        
+
+        public override void HandleControlByButtonType(ButtonType buttonType)
+        {
+            base.HandleControlByButtonType(buttonType);
+
+            if (buttonType == ButtonType.FIRE)
+            {
+                if (_weaponBase != null)
+                {
+                    _weaponBase.Fire();
+                }
+            }
+        }
     }
 }

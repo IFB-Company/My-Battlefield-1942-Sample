@@ -19,6 +19,8 @@ namespace _Scripts.Units.Vehicle
 
         private BattleVehicleBase _lastDetectedVehicle;
         
+        private bool _isVehicleAround;
+        
         public void SetIsActive(bool isActive)
         {
             this._isActive = isActive;
@@ -37,7 +39,7 @@ namespace _Scripts.Units.Vehicle
             FindVehicleLoop();
             
 #if UNITY_STANDALONE || UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && _isVehicleAround)
             {
                 var pilotController = GetComponent<UnitVehiclePilotController>();
                 if (pilotController != null)
@@ -63,7 +65,7 @@ namespace _Scripts.Units.Vehicle
             int foundSize = Physics.OverlapSphereNonAlloc(transform.position, _findRange, _cache);
             if (foundSize > 0)
             {
-                bool isVehicleFound = false;
+                _isVehicleAround = false;
                 foreach (var col in _cache)
                 {
                     if(col == null)
@@ -71,16 +73,30 @@ namespace _Scripts.Units.Vehicle
                     
                     if (col.TryGetComponent(out BattleVehicleBase battleVehicle))
                     {
-                        isVehicleFound = true;
-                        _lastDetectedVehicle = battleVehicle;
-                        OnVehicleDetected?.Invoke(_lastDetectedVehicle);
+                        if (!battleVehicle.IsOnControl)
+                        {
+                            _isVehicleAround = true;
+                            _lastDetectedVehicle = battleVehicle;
+                            OnVehicleDetected?.Invoke(_lastDetectedVehicle);
+                        }
                     }
                 }
 
-                if (!isVehicleFound)
+                if (!_isVehicleAround)
                 {
                     OnNoVehiclesNearly?.Invoke();
                 }
+            }
+            else
+            {
+                _lastDetectedVehicle = null;
+                //Clear cache
+                for (int i = 0; i < _cache.Length; i++)
+                {
+                    _cache[i] = null;
+                }
+
+                _isVehicleAround = false;
             }
         }
     }
