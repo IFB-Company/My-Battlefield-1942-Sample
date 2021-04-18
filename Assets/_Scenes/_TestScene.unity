@@ -1731,6 +1731,7 @@ Transform:
   m_Children:
   - {fileID: 1580402155}
   - {fileID: 439744964}
+  - {fileID: 2048709892}
   m_Father: {fileID: 775410326}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2535,12 +2536,17 @@ MonoBehaviour:
   _unitProperties: {fileID: 11400000, guid: 15c69129b91c3ee4ca646be90e688506, type: 2}
   _weaponBase: {fileID: 1255380159}
   _leavePosition: {fileID: 1836332726}
-  _manRb: {fileID: 1693331735}
-  _maxSpeed: 5
-  _constantForce: {fileID: 1511965387}
+  _manRb: {fileID: 1511965383}
+  _maxSpeed: 15
   _propellerMoveDir: {x: 0, y: 1, z: 0}
   _propeller: {fileID: 2768959234614171311}
   _propellerSpeed: 500
+  _upForce: 50000
+  _agilityForce: 50
+  _maxAltitude: 200
+  _body: {fileID: 775410326}
+  _flightTime: 5
+  _targetBodyFlightEulers: {x: 10, y: 0, z: 0}
 --- !u!65 &1511965385
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3703,6 +3709,64 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2044587693}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2048709891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048709892}
+  - component: {fileID: 2048709893}
+  - component: {fileID: 2048709894}
+  m_Layer: 0
+  m_Name: col (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2048709892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048709891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.68, z: 1.638}
+  m_LocalScale: {x: 0.43581712, y: 1.0381094, z: 1}
+  m_Children: []
+  m_Father: {fileID: 926315868}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2048709893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048709891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ed38723fc7f0a40b75fba9ead42be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hittableObject: {fileID: 1511965386}
+--- !u!135 &2048709894
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048709891}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2077943324
 GameObject:
   m_ObjectHideFlags: 0
@@ -4017,25 +4081,6 @@ Transform:
   m_Father: {fileID: 2652968929550410103}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2768959234604282085
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2768959234613938715}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 29f96d9f927cf864db7fdfb707b89203, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!33 &2768959234610694189
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4692,7 +4737,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2768959234614122759}
-  - component: {fileID: 2768959234604282085}
   m_Layer: 0
   m_Name: Super_Spitfire
   m_TagString: Untagged

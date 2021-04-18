@@ -1,4 +1,4 @@
-﻿using System;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -8,43 +8,96 @@ namespace _Scripts.Units.Vehicle
     {
         [SerializeField] private Rigidbody _manRb;
         [SerializeField] private float _maxSpeed = 5f;
-        [SerializeField] private ConstantForce _constantForce;
-        
+
         [Space]
         [SerializeField] private Vector3 _propellerMoveDir = new Vector3(0, 1, 0);
         [SerializeField] private Transform _propeller;
         [SerializeField] private float _propellerSpeed = 8f;
+        [SerializeField] private float _upForce = 100f;
+        [SerializeField] private float _agilityForce = 10000f;
+        [SerializeField] private float _maxAltitude = 100f;
+        [SerializeField] private Transform _body;
+        [SerializeField] private float _flightTime = 3f;
+        [SerializeField] private Vector3 _targetBodyFlightEulers;
+
+        private float _flightTimer;
+        private bool _isFlightUpDone;
 
         protected override void Awake()
         {
             base.Awake();
             Assert.IsNotNull(_manRb, "_manRb != null");
-            Assert.IsNotNull(_constantForce, "_constantForce != null");
+            Assert.IsNotNull(_body, "_body != null");
         }
 
         public override void MoveAtFrame(Vector3 dir)
         {
-            _constantForce.force = transform.forward * _unitProperties.MoveSpeed * dir.z;
+            
+            _manRb.AddForce(transform.forward * dir.z * _unitProperties.MoveSpeed * Time.deltaTime);
+
+            transform.Rotate(Vector3.up * dir.x * _unitProperties.RotationSpeed * Time.deltaTime);
 
             if (_propeller != null)
             {
                 _propeller.Rotate(_propellerMoveDir * dir.z * _propellerSpeed * Time.deltaTime);
             }
+            
         }
 
         public override void RotateAtFrame(Vector3 dir)
         {
+            var rotVector = new Vector3(
+                dir.y,
+                0,
+                -dir.x
+            );
+
+            transform.Rotate(rotVector * _agilityForce * Time.deltaTime);
+        }
+
+        private void Update()
+        {
+            CheckFlightLoop();
+        }
+
+        private void CheckFlightLoop()
+        {
+            if (_isFlightUpDone)
+                return;
             
+            if (!Mathf.Approximately(_manRb.velocity.z, 0f))
+            {
+                if (_flightTimer >= _flightTime)
+                {
+                    _flightTimer = 0;
+                    _isFlightUpDone = true;
+                    OnFlightUpDone();
+                }
+                _flightTimer += Time.deltaTime;
+            }
+            else
+            {
+                _flightTimer = 0;
+            }
+            
+        }
+
+        private void OnFlightUpDone()
+        {
+            _body.DOLocalRotate(_targetBodyFlightEulers, 1f);
+            _manRb.AddForce(Vector3.up * _upForce);
         }
 
         private void FixedUpdate()
         {
             ClampSpeedLoop();
         }
+        
 
         private void ClampSpeedLoop()
         {
             _manRb.velocity = Vector3.ClampMagnitude(_manRb.velocity, _maxSpeed);
+            _manRb.angularVelocity = Vector3.zero;
         }
     }
 }

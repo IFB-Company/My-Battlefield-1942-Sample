@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e4da3238c542f690605691513ab479, type: 3}
   m_Name: FlightSpitfire
   m_EditorClassIdentifier: 
-  _moveSpeed: 10000
-  _rotationSpeed: 180
+  _moveSpeed: 1000000
+  _rotationSpeed: 50
   _maxHp: 100
   _armor: 1
   _ignoreWeaponTypes: 01000000
