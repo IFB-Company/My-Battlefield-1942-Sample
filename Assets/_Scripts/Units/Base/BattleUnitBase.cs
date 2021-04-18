@@ -6,8 +6,19 @@ using UnityEngine.Assertions;
 
 namespace _Scripts.Units.Base
 {
+    public enum UnitType : byte
+    {
+        NONE,
+        FOOTMAN,
+        PANZER,
+        AIRCRAFT_SMALL
+    }
+    
     public abstract class BattleUnitBase : MonoBehaviour
     {
+        [SerializeField] private UnitType _unitType;
+        public UnitType UnitType => _unitType;
+        
         [SerializeField] protected Transform _cameraPosition;
         public Transform CameraPosition => _cameraPosition;
         

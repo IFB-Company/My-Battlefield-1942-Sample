@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using _Scripts.Player.Controls.Base;
 using _Scripts.Player.Controls.Enums;
 using UnityEngine;
@@ -21,18 +23,21 @@ namespace _Scripts.Player.Controls
         }
 
         [SerializeField] private ButtonContainer[] _buttonContainers;
-
         public event Action<ButtonType> OnButtonPressedEvent;
 
         private void Awake()
         {
             Assert.IsTrue(_buttonContainers.Length > 0, "_buttonContainers.Length > 0");
-            
         }
 
         private void Start()
         {
             InitButtons();
+        }
+
+        public Button GetButtonByType(ButtonType buttonType)
+        {
+            return _buttonContainers.FirstOrDefault(bc => bc.ButtonType == buttonType)?.Button;
         }
 
         private void InitButtons()

@@ -45,7 +45,10 @@ namespace _Scripts.Units.Weapons
 
         private void Update()
         {
-            transform.Translate(Vector3.forward * _moveSpeed * Time.deltaTime);
+            if (!Mathf.Approximately(_moveSpeed, 0f))
+            {
+                transform.Translate(Vector3.forward * _moveSpeed * Time.deltaTime);   
+            }
         }
     }
 }

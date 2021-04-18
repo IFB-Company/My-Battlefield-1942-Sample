@@ -7,6 +7,7 @@ namespace _Scripts.Units.Vehicle
 {
     public abstract class BattleVehicleBase : BattleUnitBase
     {
+
         [SerializeField] protected Transform _leavePosition;
         public Transform LeavePosition => _leavePosition;
         

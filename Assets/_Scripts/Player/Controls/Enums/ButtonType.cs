@@ -5,6 +5,7 @@
         NONE, 
         JUMP,
         FIRE,
-        VEHICLE_INTERACT
+        VEHICLE_INTERACT,
+        BOMB_DROP
     }
 }

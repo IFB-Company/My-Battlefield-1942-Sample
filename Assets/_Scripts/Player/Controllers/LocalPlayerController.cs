@@ -32,6 +32,8 @@ namespace _Scripts.Player.Controllers
 
         private IButtonControlProvider _buttonControlProvider;
 
+        public event Action<BattleUnitBase> OnCurrentUnitChanged; 
+
         private void OnValidate()
         {
             if (_footmanBattleUnit == null)
@@ -43,19 +45,42 @@ namespace _Scripts.Player.Controllers
         private void Awake()
         {
             Assert.IsNotNull(_localPlayerControlProvider, "_localPlayerControlProvider != null");
-
-            _buttonControlProvider = _localPlayerControlProvider.GetButtonControlProvider();
-            Assert.IsNotNull(_buttonControlProvider, "buttonProvider != null");
-            
             Assert.IsNotNull(_footmanBattleUnit, "_footmanBattleUnit != null");
             
 
-            _buttonControlProvider.OnButtonPressedEvent += ButtonProviderOnButtonPressedEvent;
+            OnCurrentUnitChanged += UpdateUiByUnit;
+            
+            if (_currentBattleUnit != null)
+            {
+                OnCurrentUnitChanged?.Invoke(_currentBattleUnit);
+            }
+
         }
+        
 
         private void OnDestroy()
         {
-            _buttonControlProvider.OnButtonPressedEvent -= ButtonProviderOnButtonPressedEvent;
+            if (_buttonControlProvider != null)
+            {
+                _buttonControlProvider.OnButtonPressedEvent -= ButtonProviderOnButtonPressedEvent;   
+            }
+            OnCurrentUnitChanged -= UpdateUiByUnit;
+        }
+        
+        
+        private void UpdateUiByUnit(BattleUnitBase obj)
+        {
+            
+            _localPlayerControlProvider.UpdateUiByUnit(obj);
+            
+            if (_buttonControlProvider != null)
+            {
+                _buttonControlProvider.OnButtonPressedEvent -= ButtonProviderOnButtonPressedEvent;
+            }
+            
+            _buttonControlProvider = _localPlayerControlProvider.GetButtonControlProvider();
+            _buttonControlProvider.OnButtonPressedEvent += ButtonProviderOnButtonPressedEvent;
+            
         }
 
         private void ButtonProviderOnButtonPressedEvent(ButtonType btnType)
@@ -102,6 +127,7 @@ namespace _Scripts.Player.Controllers
         public void SetCurrentBattleUnit(BattleUnitBase battleUnit)
         {
             _currentBattleUnit = battleUnit;
+            OnCurrentUnitChanged?.Invoke(_currentBattleUnit);
         }
     }
 }

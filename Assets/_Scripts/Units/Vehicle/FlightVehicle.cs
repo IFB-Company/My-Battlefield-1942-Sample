@@ -24,6 +24,7 @@ namespace _Scripts.Units.Vehicle
 
         [Space]
         [SerializeField] private WeaponBase[] _additionalWeapons;
+        [SerializeField] private WeaponBase[] _bombSpawnWeapons;
 
         private float _flightTimer;
         private bool _isFlightUpDone;
@@ -38,14 +39,7 @@ namespace _Scripts.Units.Vehicle
             Assert.IsNotNull(_manRb, "_manRb != null");
             Assert.IsNotNull(_body, "_body != null");
         }
-
-        protected override void OnValidate()
-        {
-            base.OnValidate();
-
-            _additionalWeapons = GetComponentsInChildren<WeaponBase>();
-        }
-
+        
         public override void MoveAtFrame(Vector3 dir)
         {
             
@@ -143,6 +137,16 @@ namespace _Scripts.Units.Vehicle
                     if (additionalWeapon != null)
                     {
                         additionalWeapon.Fire();
+                    }
+                }
+            }
+            else if (buttonType == ButtonType.BOMB_DROP)
+            {
+                foreach (var bombSpawnWeapon in _bombSpawnWeapons)
+                {
+                    if (bombSpawnWeapon != null)
+                    {
+                        bombSpawnWeapon.Fire();
                     }
                 }
             }
