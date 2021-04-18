@@ -1770,6 +1770,7 @@ GameObject:
   - component: {fileID: 1201420181}
   - component: {fileID: 1201420183}
   - component: {fileID: 1201420182}
+  - component: {fileID: 1201420184}
   m_Layer: 0
   m_Name: FootMan
   m_TagString: Untagged
@@ -1900,6 +1901,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitProperties: {fileID: 11400000, guid: dae372b41539c9b439fffbcb6ca13b61, type: 2}
+  _currentHittableData:
+    _currentHp: 0
+    _isDead: 0
+--- !u!114 &1201420184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201420175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f971f115ede77488f776e91803f136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hittableObject: {fileID: 1201420183}
+  _onDieUnityEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1255380157
 GameObject:
   m_ObjectHideFlags: 0
@@ -2504,6 +2524,7 @@ GameObject:
   - component: {fileID: 1693331737}
   - component: {fileID: 1693331736}
   - component: {fileID: 1693331738}
+  - component: {fileID: 1693331739}
   m_Layer: 0
   m_Name: GameTank_SHARMAN
   m_TagString: Untagged
@@ -2609,6 +2630,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitProperties: {fileID: 11400000, guid: 0e8c7617e2544db4cb51d17122cc5c89, type: 2}
+  _currentHittableData:
+    _currentHp: 0
+    _isDead: 0
+--- !u!114 &1693331739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693331732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f971f115ede77488f776e91803f136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hittableObject: {fileID: 1693331738}
+  _onDieUnityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1693331732}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1717568498
 GameObject:
   m_ObjectHideFlags: 0
