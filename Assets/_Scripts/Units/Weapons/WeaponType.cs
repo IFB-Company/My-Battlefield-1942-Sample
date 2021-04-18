@@ -5,6 +5,7 @@
         NONE,
         COLD_WEAPON,
         BULLET_WEAPON,
-        EXPLOSIVE_WEAPON
+        EXPLOSIVE_WEAPON,
+        SMALL_CANNON
     }
 }

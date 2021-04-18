@@ -30,9 +30,11 @@ namespace _Scripts.Location
                 if (poolStack.Any())
                 {
                     var freeObject = poolStack.Pop();
-                    Assert.IsNotNull(freeObject, "freeObject != null");
-                    freeObject.SetActive(true);
-                    return freeObject;
+                    if (freeObject != null)
+                    {
+                        freeObject.SetActive(true);
+                        return freeObject;   
+                    }
                 }
             }
 

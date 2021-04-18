@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿using _Scripts.Player.Controls.Enums;
+using _Scripts.Units.Weapons;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -20,14 +22,28 @@ namespace _Scripts.Units.Vehicle
         [SerializeField] private float _flightTime = 3f;
         [SerializeField] private Vector3 _targetBodyFlightEulers;
 
+        [Space]
+        [SerializeField] private WeaponBase[] _additionalWeapons;
+
         private float _flightTimer;
         private bool _isFlightUpDone;
+        private float _currentPropellerSpeed;
+        private float _propellerSpeedPerFrame;
+        
+        
 
         protected override void Awake()
         {
             base.Awake();
             Assert.IsNotNull(_manRb, "_manRb != null");
             Assert.IsNotNull(_body, "_body != null");
+        }
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+
+            _additionalWeapons = GetComponentsInChildren<WeaponBase>();
         }
 
         public override void MoveAtFrame(Vector3 dir)
@@ -37,11 +53,13 @@ namespace _Scripts.Units.Vehicle
 
             transform.Rotate(Vector3.up * dir.x * _unitProperties.RotationSpeed * Time.deltaTime);
 
-            if (_propeller != null)
-            {
-                _propeller.Rotate(_propellerMoveDir * dir.z * _propellerSpeed * Time.deltaTime);
-            }
-            
+
+            float maxPropellerValue = _propellerSpeed * Time.deltaTime;
+            _currentPropellerSpeed += dir.z * _propellerSpeed * Time.deltaTime;
+            _currentPropellerSpeed = Mathf.Clamp(_currentPropellerSpeed, -maxPropellerValue, maxPropellerValue);
+            _propellerSpeedPerFrame = Mathf.Lerp(_propellerSpeedPerFrame, _currentPropellerSpeed,
+                _propellerSpeed * Time.deltaTime);
+
         }
 
         public override void RotateAtFrame(Vector3 dir)
@@ -58,6 +76,15 @@ namespace _Scripts.Units.Vehicle
         private void Update()
         {
             CheckFlightLoop();
+            PropellerLoop();
+        }
+
+        private void PropellerLoop()
+        {
+            if (_propeller != null)
+            {
+                _propeller.Rotate(_propellerMoveDir * _propellerSpeedPerFrame);
+            }
         }
 
         private void CheckFlightLoop()
@@ -98,6 +125,27 @@ namespace _Scripts.Units.Vehicle
         {
             _manRb.velocity = Vector3.ClampMagnitude(_manRb.velocity, _maxSpeed);
             _manRb.angularVelocity = Vector3.zero;
+        }
+        
+        public override void HandleControlByButtonType(ButtonType buttonType)
+        {
+            base.HandleControlByButtonType(buttonType);
+
+            if (buttonType == ButtonType.FIRE)
+            {
+                if (_weaponBase != null)
+                {
+                    _weaponBase.Fire();
+                }
+
+                foreach (var additionalWeapon in _additionalWeapons)
+                {
+                    if (additionalWeapon != null)
+                    {
+                        additionalWeapon.Fire();
+                    }
+                }
+            }
         }
     }
 }

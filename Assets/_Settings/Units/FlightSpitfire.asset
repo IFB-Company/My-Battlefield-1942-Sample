@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FlightSpitfire
   m_EditorClassIdentifier: 
   _moveSpeed: 1000000
-  _rotationSpeed: 50
+  _rotationSpeed: 90
   _maxHp: 100
   _armor: 1
   _ignoreWeaponTypes: 01000000

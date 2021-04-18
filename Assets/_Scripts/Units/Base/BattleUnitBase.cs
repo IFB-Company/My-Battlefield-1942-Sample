@@ -14,7 +14,7 @@ namespace _Scripts.Units.Base
         [SerializeField] protected UnitProperties _unitProperties;
         [SerializeField] protected WeaponBase _weaponBase;
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             if (_weaponBase == null)
             {
