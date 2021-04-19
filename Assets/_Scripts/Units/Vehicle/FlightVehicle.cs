@@ -53,11 +53,16 @@ namespace _Scripts.Units.Vehicle
             _currentPropellerSpeed = Mathf.Clamp(_currentPropellerSpeed, -maxPropellerValue, maxPropellerValue);
             _propellerSpeedPerFrame = Mathf.Lerp(_propellerSpeedPerFrame, _currentPropellerSpeed,
                 _propellerSpeed * Time.deltaTime);
+            
+            _manRb.useGravity = Mathf.Approximately(dir.z, 0f);
 
         }
 
         public override void RotateAtFrame(Vector3 dir)
         {
+            if (!_isFlightUpDone)
+                return;
+            
             var rotVector = new Vector3(
                 dir.y,
                 0,
@@ -69,6 +74,9 @@ namespace _Scripts.Units.Vehicle
 
         private void Update()
         {
+            if (!IsOnControl)
+                return;
+            
             CheckFlightLoop();
             PropellerLoop();
         }

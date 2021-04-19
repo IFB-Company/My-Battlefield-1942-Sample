@@ -37,8 +37,18 @@ namespace _Scripts.Player.Controls
 
         public Button GetButtonByType(ButtonType buttonType)
         {
-            return _buttonContainers.FirstOrDefault(bc => bc.ButtonType == buttonType)?.Button;
+            foreach (var buttonContainer in _buttonContainers)
+            {
+                if (buttonContainer != null && buttonContainer.ButtonType == buttonType)
+                {
+                    return buttonContainer?.Button;
+                }
+            }
+
+            return null;
         }
+        
+        
 
         private void InitButtons()
         {

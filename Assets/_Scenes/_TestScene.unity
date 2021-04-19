@@ -1493,7 +1493,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386252971}
   m_LocalRotation: {x: 0.04053883, y: -0, z: -0, w: 0.999178}
-  m_LocalPosition: {x: 0, y: 2.12, z: -5.4}
+  m_LocalPosition: {x: 0, y: 3.29, z: -8.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 842225764}
@@ -3623,14 +3623,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306379093}
-  m_LocalRotation: {x: -0.094770595, y: -0, z: -0, w: 0.99549913}
+  m_LocalRotation: {x: -0.0065039685, y: -0, z: -0, w: 0.99997884}
   m_LocalPosition: {x: 1, y: 0.942, z: 1.746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2067030274}
   m_Father: {fileID: 231495663}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -10.876, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.745, y: 0, z: 0}
 --- !u!114 &1306379095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4025,7 +4025,7 @@ MonoBehaviour:
   _propellerMoveDir: {x: 0, y: 1, z: 0}
   _propeller: {fileID: 2768959234614171311}
   _propellerSpeed: 500
-  _upForce: 50000
+  _upForce: 150000
   _agilityForce: 50
   _maxAltitude: 200
   _body: {fileID: 775410326}
@@ -4832,14 +4832,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795761151}
-  m_LocalRotation: {x: -0.094770595, y: -0, z: -0, w: 0.99549913}
+  m_LocalRotation: {x: -0.0065039685, y: -0, z: -0, w: 0.99997884}
   m_LocalPosition: {x: -1, y: 0.942, z: 1.746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1389701877}
   m_Father: {fileID: 231495663}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -10.876, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.745, y: 0, z: 0}
 --- !u!114 &1795761153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5280,7 +5280,6 @@ MonoBehaviour:
     _uiButtonControlProvider: {fileID: 2030678840}
   - _unitType: 3
     _uiButtonControlProvider: {fileID: 75491022}
-  _vehicleInteractButton: {fileID: 489500188}
   _pilotController: {fileID: 1201420180}
   _vehicleDetector: {fileID: 1201420181}
 --- !u!114 &1969104843 stripped

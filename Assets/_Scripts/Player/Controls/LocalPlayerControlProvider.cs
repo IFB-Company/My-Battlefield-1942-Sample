@@ -39,6 +39,8 @@ namespace _Scripts.Player.Controls
         private Dictionary<string, IControlProvider> _controlsDict;
         private UIButtonControlProvider _currentButtonProvider;
 
+        private BattleVehicleBase _lastDetectedVehicle;
+        
         private void Awake()
         {
             Assert.IsNotNull(_rotationJoystick ,"_rotationJoystick != null");
@@ -51,6 +53,7 @@ namespace _Scripts.Player.Controls
             _vehicleDetector.OnNoVehiclesNearly += VehicleDetectorOnNoVehiclesNearly;
 
             InitControls();
+            InitAllVehicleInteractButtons();
         }
         
 
@@ -60,31 +63,55 @@ namespace _Scripts.Player.Controls
             _vehicleDetector.OnNoVehiclesNearly -= VehicleDetectorOnNoVehiclesNearly;
         }
 
+        private void InitAllVehicleInteractButtons()
+        {
+            foreach (var controlProvider in _controlProviders)
+            {
+                Assert.IsNotNull(controlProvider, "controlProvider != null");
+                Assert.IsNotNull(controlProvider.UIButtonControlProvider, "controlProvider.UIButtonControlProvider != null");
+                var vehBtn =
+                    controlProvider.UIButtonControlProvider.GetButtonByType(ButtonType.VEHICLE_INTERACT);
+                if (vehBtn)
+                {
+                    vehBtn.onClick.AddListener(() =>
+                    {
+                        if (_pilotController.IsOnVehicle)
+                        {
+                            _pilotController.LeaveFromVehicle();
+                        }
+                        else
+                        {
+                            if (_lastDetectedVehicle != null)
+                            {
+                                _pilotController.EnterInVehicle(_lastDetectedVehicle);   
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
         private void VehicleDetectorOnVehicleDetected(BattleVehicleBase vehicle)
         {
-            //TODO: FIX BUG WITH INTERACT 
             var vehicleInteractBtn = _currentButtonProvider.GetButtonByType(ButtonType.VEHICLE_INTERACT);
-            Assert.IsNotNull(vehicleInteractBtn, "vehicleInteractBtn != null");
-            vehicleInteractBtn.gameObject.SetActive(true);
-            vehicleInteractBtn.onClick.RemoveAllListeners();
-            vehicleInteractBtn.onClick.AddListener(() =>
+            if (vehicleInteractBtn != null)
             {
-                if (_pilotController.IsOnVehicle)
-                {
-                    _pilotController.LeaveFromVehicle();
-                }
-                else
-                {
-                    _pilotController.EnterInVehicle(vehicle);   
-                }
-            });
+                vehicleInteractBtn.gameObject.SetActive(true);   
+            }
+
+            _lastDetectedVehicle = vehicle;
         }
         
         private void VehicleDetectorOnNoVehiclesNearly()
         {
             var vehicleInteractBtn = _currentButtonProvider.GetButtonByType(ButtonType.VEHICLE_INTERACT);
-            Assert.IsNotNull(vehicleInteractBtn, "vehicleInteractBtn != null");
-            vehicleInteractBtn.gameObject.SetActive(false);
+            if(vehicleInteractBtn == null) {
+                Assert.IsNotNull(vehicleInteractBtn, "vehicleInteractBtn != null");
+            }
+            else
+            {
+                vehicleInteractBtn.gameObject.SetActive(false);   
+            }
         }
 
         private void InitControls()
