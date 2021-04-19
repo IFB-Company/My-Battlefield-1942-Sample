@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using _Scripts.Player.Controllers.Base;
 using _Scripts.Player.Controls;
 using _Scripts.Player.Controls.Base;
@@ -7,7 +6,6 @@ using _Scripts.Player.Controls.Enums;
 using _Scripts.Static;
 using _Scripts.Units;
 using _Scripts.Units.Base;
-using _Scripts.Units.Vehicle;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -17,9 +15,7 @@ namespace _Scripts.Player.Controllers
     {
         [SerializeField] private LocalPlayerControlProvider _localPlayerControlProvider;
         [SerializeField] private FootmanBattleUnit _footmanBattleUnit;
-        [Space]
-        [SerializeField] private Vector3 _unitMoveDirection = Vector3.forward;
-        
+
         [Space]
         [Header("Runtime")]
         [SerializeField] private BattleUnitBase _currentBattleUnit;
@@ -49,14 +45,17 @@ namespace _Scripts.Player.Controllers
             
 
             OnCurrentUnitChanged += UpdateUiByUnit;
-            
+
+        }
+
+        private void Start()
+        {
             if (_currentBattleUnit != null)
             {
                 OnCurrentUnitChanged?.Invoke(_currentBattleUnit);
             }
-
         }
-        
+
 
         private void OnDestroy()
         {

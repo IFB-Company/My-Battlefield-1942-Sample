@@ -12,11 +12,17 @@ namespace _Scripts.Units
     public class HittableObject : MonoBehaviour
     {
         [SerializeField] private UnitProperties _unitProperties;
+        public UnitProperties UnitProperties => _unitProperties;
         
         [Space]
         [Header("Runtime")]
         [SerializeField] private HittableData _currentHittableData;
+
+        public HittableData CurrentHittableData => _currentHittableData;
         
+        /// <summary>
+        /// int - damage that dealt
+        /// </summary>
         public event Action<int> OnDamaged;
         public event Action OnDie;
 

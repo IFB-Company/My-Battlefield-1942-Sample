@@ -42,8 +42,12 @@ namespace _Scripts.Units.Vehicle
         
         public override void MoveAtFrame(Vector3 dir)
         {
+
+            if (dir.z > Mathf.Epsilon)
+            {
+                _manRb.AddForce(transform.forward * dir.z * _unitProperties.MoveSpeed * Time.deltaTime);    
+            }
             
-            _manRb.AddForce(transform.forward * dir.z * _unitProperties.MoveSpeed * Time.deltaTime);
 
             transform.Rotate(Vector3.up * dir.x * _unitProperties.RotationSpeed * Time.deltaTime);
 
@@ -92,6 +96,9 @@ namespace _Scripts.Units.Vehicle
         private void CheckFlightLoop()
         {
             if (_isFlightUpDone)
+                return;
+
+            if (_manRb.velocity.z <= Mathf.Epsilon)
                 return;
             
             if (!Mathf.Approximately(_manRb.velocity.z, 0f))
