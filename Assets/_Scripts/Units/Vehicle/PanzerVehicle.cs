@@ -55,6 +55,17 @@ namespace _Scripts.Units.Vehicle
             _muzzle.localRotation = Quaternion.Euler(clampedXRot, 0, 0);
         }
 
+        protected override void OnPilotLeaveVehicle()
+        {
+            _constantForce.force = Vector3.zero;
+            _constantForce.torque = Vector3.zero;
+            _constantForce.relativeForce = Vector3.zero;
+            _constantForce.relativeTorque = Vector3.zero;
+
+            _leadRb.velocity = Vector3.zero;
+            _leadRb.angularVelocity = Vector3.zero;
+        }
+
         private void FixedUpdate()
         {
             PhysicsLoop();

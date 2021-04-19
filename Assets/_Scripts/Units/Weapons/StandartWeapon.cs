@@ -18,6 +18,7 @@ namespace _Scripts.Units.Weapons
                 return false;
 
             FireProcess();
+            _isCanFire = false;
             return true;
         }
 

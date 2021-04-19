@@ -3833,7 +3833,7 @@ MonoBehaviour:
   _weaponData:
     _damageRange:
       _range: {x: 5, y: 10}
-    _weaponDelay: 0.5
+    _weaponDelay: 0.1
     _weaponType: 4
     _isInfiniteAmmunition: 1
     _maxAmmunition: 0
@@ -5122,7 +5122,7 @@ MonoBehaviour:
   _weaponData:
     _damageRange:
       _range: {x: 5, y: 10}
-    _weaponDelay: 0.5
+    _weaponDelay: 0.1
     _weaponType: 4
     _isInfiniteAmmunition: 1
     _maxAmmunition: 0

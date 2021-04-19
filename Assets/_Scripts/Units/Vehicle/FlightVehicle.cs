@@ -40,6 +40,13 @@ namespace _Scripts.Units.Vehicle
             Assert.IsNotNull(_body, "_body != null");
         }
         
+        protected override void OnPilotLeaveVehicle()
+        {
+            _manRb.velocity = Vector3.zero;
+            _manRb.angularVelocity = Vector3.zero;
+            _manRb.useGravity = true;
+        }
+        
         public override void MoveAtFrame(Vector3 dir)
         {
 
@@ -83,6 +90,32 @@ namespace _Scripts.Units.Vehicle
             
             CheckFlightLoop();
             PropellerLoop();
+            CheckAltitudeLoop();
+            
+            #if UNITY_STANDALONE || UNITY_EDITOR
+            DebugLoop();
+            #endif
+        }
+
+        private void CheckAltitudeLoop()
+        {
+            var posY = transform.position.y;
+            if (posY < -_maxAltitude || posY > _maxAltitude)
+            {
+                var hittable = GetComponentInChildren<HittableObject>();
+                if (hittable != null)
+                {
+                    hittable.Kill(this);
+                }
+            }
+        }
+
+        private void DebugLoop()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                DropBombs();
+            }
         }
 
         private void PropellerLoop()
@@ -157,12 +190,17 @@ namespace _Scripts.Units.Vehicle
             }
             else if (buttonType == ButtonType.BOMB_DROP)
             {
-                foreach (var bombSpawnWeapon in _bombSpawnWeapons)
+                DropBombs();
+            }
+        }
+
+        private void DropBombs()
+        {
+            foreach (var bombSpawnWeapon in _bombSpawnWeapons)
+            {
+                if (bombSpawnWeapon != null)
                 {
-                    if (bombSpawnWeapon != null)
-                    {
-                        bombSpawnWeapon.Fire();
-                    }
+                    bombSpawnWeapon.Fire();
                 }
             }
         }

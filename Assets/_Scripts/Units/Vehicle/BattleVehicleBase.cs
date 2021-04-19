@@ -41,7 +41,13 @@ namespace _Scripts.Units.Vehicle
             }
             
             OnLeaveFromVehicle?.Invoke(this, _pilot);
+            OnPilotLeaveVehicle();
             _pilot = null;
+        }
+
+        protected virtual void OnPilotLeaveVehicle()
+        {
+            Debug.Log($"Pilot {_pilot?.name} leave {name} vehicle!");
         }
     }
 }
