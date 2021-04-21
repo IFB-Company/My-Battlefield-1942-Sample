@@ -36,6 +36,7 @@ namespace _Scripts.Units.Weapons
             if (!_isActive)
                 return;
             
+            Debug.Log($"Bomb {gameObject.name} exploded by {other.gameObject.name}!");
             var detected = Physics.OverlapSphereNonAlloc(transform.position, _explodeRange, _colliders);
             foreach (var col in _colliders)
             {

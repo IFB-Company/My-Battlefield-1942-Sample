@@ -644,20 +644,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5519686915199350517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21f6accc0d160174eaaf5aa314461598, type: 3}
+  m_Script: {fileID: 11500000, guid: a7288cf34d332b042b18d8f2d23ef1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponData:
     _damageRange:
-      _range: {x: 5, y: 10}
-    _weaponDelay: 0.5
+      _range: {x: 75, y: 150}
+    _weaponDelay: 1.5
     _weaponType: 3
     _isInfiniteAmmunition: 1
     _maxAmmunition: 0
     _currentAmmunition: 0
   _aimAnchor: {fileID: 5519686915054380121}
-  _projectilePrefab: {fileID: 4283191502156165863, guid: 094f9f2f1b689a24b96ca075f331f508,
+  _projectilePrefab: {fileID: 4283191502156165863, guid: 3681e22d8f8d7e844a7117d136212407,
     type: 3}
+  _cannonPower: 5000
 --- !u!1 &5519686915472990210
 GameObject:
   m_ObjectHideFlags: 0

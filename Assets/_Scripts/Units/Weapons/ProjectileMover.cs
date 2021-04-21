@@ -7,6 +7,7 @@ namespace _Scripts.Units.Weapons
     public class ProjectileMover : MonoBehaviour
     {
         [SerializeField] private string _poolName;
+        [Header("If ms or lifetime is zero = infinity")]
         [SerializeField] private float _lifeTime = 5f;
         [SerializeField] private float _moveSpeed = 10f;
 
@@ -19,7 +20,10 @@ namespace _Scripts.Units.Weapons
 
         private void OnEnable()
         {
-            Invoke(nameof(DisableProcess), _lifeTime);
+            if (!Mathf.Approximately(_lifeTime, 0f))
+            {
+                Invoke(nameof(DisableProcess), _lifeTime);   
+            }
         }
 
         private void DisableProcess()

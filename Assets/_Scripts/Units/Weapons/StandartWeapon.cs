@@ -11,6 +11,8 @@ namespace _Scripts.Units.Weapons
         
         protected float _fireTimer;
         protected bool _isCanFire;
+
+        protected GameObject _lastBullet;
         
         protected override bool OnFire()
         {
@@ -37,7 +39,9 @@ namespace _Scripts.Units.Weapons
             
             bullet.transform.position = _aimAnchor.transform.position;
             bullet.transform.rotation = _aimAnchor.transform.rotation;
-            
+
+            _lastBullet = bullet;
+
         }
 
         protected virtual void Update()
