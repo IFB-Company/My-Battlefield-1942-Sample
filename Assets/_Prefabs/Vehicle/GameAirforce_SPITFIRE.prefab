@@ -470,24 +470,13 @@ MonoBehaviour:
   _hittableObject: {fileID: 6452411474733085526}
   _onDieUnityEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6452411474733085529}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _dieEffectPrefab: {fileID: 100010, guid: e0609132424a24844b1d53ad3d704fd9, type: 3}
   _dieModelPrefab: {fileID: 2404454347195171150, guid: c15c3e7a536f333409dc8f6fa0918ce6,
     type: 3}
   _dieAffectRange: {x: 100, y: 1500}
   _dieAffectDirection: {x: 0, y: 1, z: 0}
+  _isDeactivateOnDie: 1
 --- !u!1 &6452411474801554550
 GameObject:
   m_ObjectHideFlags: 0

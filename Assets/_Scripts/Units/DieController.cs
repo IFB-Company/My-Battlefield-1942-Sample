@@ -17,7 +17,7 @@ namespace _Scripts.Units
         [SerializeField] private GameObject _dieModelPrefab;
         [SerializeField] private Vector2 _dieAffectRange = new Vector2(100, 1500);
         [SerializeField] private Vector3 _dieAffectDirection = new Vector3(0, 1, 0);
-
+        [SerializeField] private bool _isDeactivateOnDie = true;
 
         public event Action<HittableObject> OnDie; 
         
@@ -43,6 +43,11 @@ namespace _Scripts.Units
             ReleaseCamera();
             ShowEffect();
             ShowDieModel();
+
+            if (_isDeactivateOnDie && _unit != null)
+            {
+                _unit.gameObject.SetActive(false);
+            }
             
             _onDieUnityEvent?.Invoke();
             OnDie?.Invoke(_hittableObject);
