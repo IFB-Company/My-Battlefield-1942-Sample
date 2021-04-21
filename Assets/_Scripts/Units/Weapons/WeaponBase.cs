@@ -19,7 +19,6 @@ namespace _Scripts.Units.Weapons
         private void Awake()
         {
             _ownerUnit = GetComponentInParent<BattleUnitBase>();
-            Debug.Log($"Owner unit found!: {_ownerUnit.name}");
         }
 
         public virtual void Fire()
