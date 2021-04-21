@@ -3615,6 +3615,7 @@ MonoBehaviour:
   _onDieUnityEvent:
     m_PersistentCalls:
       m_Calls: []
+  _dieEffectPrefab: {fileID: 0}
 --- !u!1 &1235684362
 GameObject:
   m_ObjectHideFlags: 0
@@ -4377,6 +4378,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _dieEffectPrefab: {fileID: 100010, guid: e0609132424a24844b1d53ad3d704fd9, type: 3}
 --- !u!1 &1548309417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4913,6 +4915,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _dieEffectPrefab: {fileID: 100010, guid: e0609132424a24844b1d53ad3d704fd9, type: 3}
 --- !u!1 &1717568498
 GameObject:
   m_ObjectHideFlags: 0

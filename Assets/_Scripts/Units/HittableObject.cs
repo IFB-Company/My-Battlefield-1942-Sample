@@ -34,6 +34,13 @@ namespace _Scripts.Units
                 new HittableData(_unitProperties.MaxHp, false);
         }
 
+
+        [ContextMenu("Kill Debug")]
+        private void KillDebug()
+        {
+            Kill(null);
+        }
+        
         public void Kill(BattleUnitBase sender)
         {
             var damage = Mathf.RoundToInt(_unitProperties.MaxHp);
