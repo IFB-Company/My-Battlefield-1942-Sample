@@ -1,4 +1,5 @@
-﻿using _Scripts.Player.Controls.Enums;
+﻿using System;
+using _Scripts.Player.Controls.Enums;
 using _Scripts.Units.Weapons;
 using DG.Tweening;
 using UnityEngine;
@@ -21,11 +22,15 @@ namespace _Scripts.Units.Vehicle
         [SerializeField] private Transform _body;
         [SerializeField] private float _flightTime = 3f;
         [SerializeField] private Vector3 _targetBodyFlightEulers;
-
+        [SerializeField] private float _damagePerSpeed = 10f;
+        [SerializeField] private float _minSpeedToDamage = 6f;
+        
         [Space]
         [SerializeField] private WeaponBase[] _additionalWeapons;
         [SerializeField] private WeaponBase[] _bombSpawnWeapons;
 
+        private HittableObject _hittableObject;
+        
         private float _flightTimer;
         private bool _isFlightUpDone;
         private float _currentPropellerSpeed;
@@ -191,6 +196,39 @@ namespace _Scripts.Units.Vehicle
             else if (buttonType == ButtonType.BOMB_DROP)
             {
                 DropBombs();
+            }
+        }
+
+        private bool _isAbleToDestroy;
+
+        private void MakeAbleToDestroy()
+        {
+            if (_isAbleToDestroy)
+                return;
+            _isAbleToDestroy = true;
+        }
+        private void OnCollisionEnter(Collision other)
+        {
+            
+            if (!_isFlightUpDone)
+                return;
+            
+            if (!_isAbleToDestroy)
+            {
+                Invoke(nameof(MakeAbleToDestroy), 1f);
+                return;
+            }
+            
+            var dmg = _damagePerSpeed * Mathf.Abs(_manRb.velocity.z);
+
+            if (_hittableObject == null)
+            {
+                _hittableObject = GetComponentInChildren<HittableObject>();
+            }
+
+            if (_hittableObject != null)
+            {
+                _hittableObject.Damage(Mathf.RoundToInt(dmg));
             }
         }
 

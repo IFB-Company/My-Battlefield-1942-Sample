@@ -76,5 +76,25 @@ namespace _Scripts.Units
             }
 
         }
+        
+        public void Damage(int damage)
+        {
+            if (_currentHittableData.IsDead)
+                return;
+            
+            damage = Mathf.Clamp(damage, 0, Mathf.Abs(damage));
+            var lastHp = _currentHittableData.CurrentHp;
+            var nextHp = lastHp - damage;
+            nextHp = Mathf.Clamp(nextHp, 0, Mathf.Abs(nextHp));
+            bool isDead = nextHp <= 0;
+            _currentHittableData = new HittableData(nextHp, isDead);
+
+            if (isDead)
+            {
+                OnDie?.Invoke();
+            }
+                
+            OnDamaged?.Invoke(damage);
+        }
     }
 }

@@ -47,7 +47,7 @@ MonoBehaviour:
   _weaponData:
     _damageRange:
       _range: {x: 5, y: 10}
-    _weaponDelay: 0.5
+    _weaponDelay: 0.01
     _weaponType: 2
     _isInfiniteAmmunition: 0
     _maxAmmunition: 12

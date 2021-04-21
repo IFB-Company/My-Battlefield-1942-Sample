@@ -3610,6 +3610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f971f115ede77488f776e91803f136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unit: {fileID: 1201420178}
   _hittableObject: {fileID: 1201420183}
   _onDieUnityEvent:
     m_PersistentCalls:
@@ -4299,6 +4300,8 @@ MonoBehaviour:
   _body: {fileID: 775410326}
   _flightTime: 3
   _targetBodyFlightEulers: {x: 15, y: 0, z: 0}
+  _damagePerSpeed: 10
+  _minSpeedToDamage: 6
   _additionalWeapons:
   - {fileID: 1306379095}
   - {fileID: 1795761153}
@@ -4357,6 +4360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f971f115ede77488f776e91803f136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unit: {fileID: 1511965384}
   _hittableObject: {fileID: 1511965386}
   _onDieUnityEvent:
     m_PersistentCalls:
@@ -4892,6 +4896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f971f115ede77488f776e91803f136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unit: {fileID: 1693331734}
   _hittableObject: {fileID: 1693331738}
   _onDieUnityEvent:
     m_PersistentCalls:
